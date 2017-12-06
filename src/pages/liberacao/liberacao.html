@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Liberação de Uso
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Token de Liberação</ion-label>
+      <ion-input type="text" [(ngModel)]="token"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button full (click)="login()">Entrar</button>
+</ion-content>
