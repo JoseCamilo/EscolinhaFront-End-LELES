@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { TabsPage } from "../tabs/tabs";
+import { Escola } from "../../domain/escola/escola";
+import { Aluno } from "../../domain/aluno/aluno";
 
 @Component({
   selector: 'page-escolas',
@@ -9,15 +11,17 @@ import { TabsPage } from "../tabs/tabs";
 })
 export class EscolasPage {
 
-  nome: string;
-  escolas: string[] = [];
+  escolas: Escola[] = [];
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, private storage: Storage) {
 
   }
 
   ionViewDidEnter(){
-    console.log("viewdidenter");
+    this.loadEscolas();
+  }
+
+  loadEscolas(){
     this.storage.get('escolas').then((val) => {
         if(val){
           this.escolas = val;
@@ -25,12 +29,8 @@ export class EscolasPage {
       });
   }
 
-  ngOnInit(){
-    console.log("ngOnInit");
-  }
-
   itemSelected(escola){
-    this.storage.set('setEscola', 'escola'+escola);
+    this.storage.set('setEscola', escola);
     this.navCtrl.setRoot(TabsPage);
   }
 
@@ -70,18 +70,17 @@ export class EscolasPage {
         {
           text: 'Cancelar',
           handler: data => {
-            console.log('Cancel clicked');
+
           }
         },
         {
           text: 'Salvar',
           handler: data => {
-            console.log('Saved clicked', data);
-            this.nome = data.nome;
-            if(this.nome){
-              this.escolas.push(this.nome);
-              this.storage.set('escolas', this.escolas)
-              this.storage.set('escola'+this.nome, { escola : this.nome, alunos : [{nome:'Aluno A '+this.nome }, {nome:'Aluno B '+this.nome }] });
+            let nomeEscola = data.nome;
+            if(nomeEscola){
+              let newescola = new Escola(nomeEscola, [new Aluno('Aluno A '+nomeEscola) , new Aluno('Aluno B '+nomeEscola)])
+              this.escolas.push(newescola);
+              this.storage.set('escolas', this.escolas);
             }else{
               this.showErrorAlert("Preencha o Nome da Escola!");
             }
