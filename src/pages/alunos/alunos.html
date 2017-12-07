@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Alunos</h2>
+
+  <ion-list>
+    <button ion-item *ngFor="let aluno of alunos" (click)="itemSelected(aluno)">
+      {{ aluno.nome }}
+    </button>  
+  </ion-list>
+
+</ion-content>
