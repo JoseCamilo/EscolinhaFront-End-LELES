@@ -29,9 +29,11 @@
     </ion-item>
 
 
-    <ion-item (click)="selecionaData()">
+    <!--<ion-item (click)="selecionaData()">-->
+    <ion-item>
       <ion-label stacked>Data de Nascimento</ion-label>
-      <ion-datetime disabled="true" [(ngModel)]="aluno.nascimento" name="data" displayFormat="DD/MM/YY"></ion-datetime>
+      <!--<ion-datetime disabled="true" [(ngModel)]="aluno.nascimento" name="data" displayFormat="DD/MM/YY"></ion-datetime>-->
+      <ion-datetime displayFormat="DD/MM/YY" pickerFormat="DD/MM/YY" [(ngModel)]="aluno.nascimento"></ion-datetime>
     </ion-item>
 
     <ion-item>

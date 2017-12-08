@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { Jogo } from "../../domain/jogo/jogo";
 import { AddJogoPage } from "../addJogo/addJogo";
 

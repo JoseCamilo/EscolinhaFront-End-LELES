@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf='!pagamento._id'>Novo Pagamento</ion-title>
+    <ion-title *ngIf='pagamento._id'>Editar Pagamento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Título</ion-label>
+      <ion-input type="text" [(ngModel)]="pagamento.title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Descrição</ion-label>
+      <ion-input type="text" [(ngModel)]="pagamento.descricao"></ion-input>
+    </ion-item>
+
+    <ion-item>
+    <!--<ion-item (click)="selecionaData()">-->
+      <ion-label stacked>Data</ion-label>
+      <!--<ion-datetime disabled="true" [(ngModel)]="pagamento.data" name="data" displayFormat="DD/MM/YY"></ion-datetime>-->
+      <ion-datetime displayFormat="DD/MM/YY" pickerFormat="DD/MM/YY" [(ngModel)]="pagamento.data"></ion-datetime>
+    </ion-item>
+
+  </ion-list>
+
+  <div align="middle">
+    <button ion-button (click)="savePagamento()">Salvar</button>
+    <button ion-button *ngIf='pagamento._id' (click)="deletePagamento()">Excluir</button>
+  </div>
+
+</ion-content>

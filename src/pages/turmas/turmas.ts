@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { Turma } from "../../domain/turma/turma";
 import { AddTurmaPage } from "../addTurma/addTurma";
 
