@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf='!turma._id'>Nova Turma</ion-title>
+    <ion-title *ngIf='turma._id'>Editar Turma</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Título da Turma</ion-label>
+      <ion-input type="text" [(ngModel)]="turma.title"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div align="middle">
+    <button ion-button (click)="saveTurma()">Salvar</button>
+    <button ion-button *ngIf='turma._id' (click)="deleteTurma()">Excluir</button>
+  </div>
+
+</ion-content>

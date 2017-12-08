@@ -5,6 +5,8 @@ import { MyApp } from './app.component';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { Camera } from '@ionic-native/camera';
+import { DatePicker } from '@ionic-native/date-picker';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LiberacaoPage } from "../pages/liberacao/liberacao";
@@ -14,6 +16,7 @@ import { AlunosPage } from "../pages/alunos/alunos";
 import { TurmasPage } from "../pages/turmas/turmas";
 import { JogosPage } from "../pages/jogos/jogos";
 import { PagamentosPage } from "../pages/pagamentos/pagamentos";
+import { AddAlunoPage } from "../pages/addAluno/addAluno";
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { PagamentosPage } from "../pages/pagamentos/pagamentos";
     AlunosPage,
     TurmasPage,
     JogosPage,
-    PagamentosPage
+    PagamentosPage,
+    AddAlunoPage
   ],
   imports: [
     BrowserModule,
@@ -40,11 +44,14 @@ import { PagamentosPage } from "../pages/pagamentos/pagamentos";
     AlunosPage,
     TurmasPage,
     JogosPage,
-    PagamentosPage
+    PagamentosPage,
+    AddAlunoPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
+    DatePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

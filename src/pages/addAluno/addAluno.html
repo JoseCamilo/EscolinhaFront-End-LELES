@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf='!aluno._id'>Novo Aluno</ion-title>
+    <ion-title *ngIf='aluno._id'>Editar Aluno</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+      <ion-avatar item-left *ngIf="url">
+        <img [src]="url">
+      </ion-avatar>
+      <button ion-button outline item-right (click)="tiraFoto()">
+          <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+      </button>
+  </ion-item>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="aluno.nome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Telefone</ion-label>
+      <ion-input type="text" [(ngModel)]="aluno.telefone"></ion-input>
+    </ion-item>
+
+
+    <ion-item (click)="selecionaData()">
+      <ion-label stacked>Data de Nascimento</ion-label>
+      <ion-datetime disabled="true" [(ngModel)]="aluno.nascimento" name="data" displayFormat="DD/MM/YY"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Endereço</ion-label>
+      <ion-input type="text" [(ngModel)]="aluno.endereco"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>RG</ion-label>
+      <ion-input type="text" [(ngModel)]="aluno.rg"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div align="middle">
+    <button ion-button (click)="saveAluno()">Salvar</button>
+    <button ion-button *ngIf='aluno._id' (click)="deleteAluno()">Excluir</button>
+  </div>
+
+</ion-content>

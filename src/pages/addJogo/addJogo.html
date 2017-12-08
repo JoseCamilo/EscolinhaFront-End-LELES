@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf='!jogo._id'>Novo Jogo</ion-title>
+    <ion-title *ngIf='jogo._id'>Editar Jogo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Título</ion-label>
+      <ion-input type="text" [(ngModel)]="jogo.title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Descrição</ion-label>
+      <ion-input type="text" [(ngModel)]="jogo.descricao"></ion-input>
+    </ion-item>
+
+
+    <ion-item (click)="selecionaData()">
+      <ion-label stacked>Data</ion-label>
+      <ion-datetime disabled="true" [(ngModel)]="jogo.data" name="data" displayFormat="DD/MM/YY"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Endereço</ion-label>
+      <ion-input type="text" [(ngModel)]="jogo.endereco"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div align="middle">
+    <button ion-button (click)="saveJogo()">Salvar</button>
+    <button ion-button *ngIf='jogo._id' (click)="deleteJogo()">Excluir</button>
+  </div>
+
+</ion-content>

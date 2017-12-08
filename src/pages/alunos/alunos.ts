@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Aluno } from "../../domain/aluno/aluno";
+import { AddAlunoPage } from "../addAluno/addAluno";
 
 @Component({
   selector: 'page-alunos',
@@ -16,22 +17,10 @@ export class AlunosPage {
     
   }
 
-  ionViewDidEnter(){
-    
-    console.log("didEnter");
-  }
-
   ngOnInit(){
-    console.log("onInit");
     this.loadAlunos();
     
   }
-
-  ionViewCanEnter(){
-    console.log("canView");
-    
-  }
-
 
   loadAlunos(){
     this.storage.get('setEscola').then((res) => {
@@ -40,5 +29,15 @@ export class AlunosPage {
           this.alunos = res.alunos;
         }
       });
+  }
+
+  addAluno(){
+    this.navCtrl.push(AddAlunoPage);
+  }
+
+  itemSelected(aluno){
+    this.navCtrl.push(AddAlunoPage,{
+      aluno: aluno
+    });
   }
 }

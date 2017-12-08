@@ -8,9 +8,15 @@
   <h2>Alunos</h2>
 
   <ion-list>
-    <button ion-item *ngFor="let aluno of alunos" (click)="itemSelected(aluno)">
-      {{ aluno.nome }}
-    </button>  
+    <ion-item *ngFor="let aluno of alunos" (click)="itemSelected(aluno)">
+      <ion-avatar item-start>
+        <img src={{aluno.avatar}}>
+      </ion-avatar>
+      <h2>{{aluno.nome}}</h2>
+    </ion-item>
   </ion-list>
 
+  <ion-fab right bottom>
+    <button ion-fab mini (click)="addAluno()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>
