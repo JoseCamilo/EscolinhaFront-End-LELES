@@ -3,8 +3,9 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Aluno } from "../../domain/aluno/aluno";
 
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
 import { DatePicker } from "@ionic-native/date-picker";
+import { AlunoDao } from "../../domain/aluno/aluno-dao";
 
 @Component({
   selector: 'page-add-aluno',
@@ -20,7 +21,8 @@ export class AddAlunoPage {
               public navParams: NavParams, 
               private storage: Storage, 
               private camera: Camera,
-              public datePicker: DatePicker) {
+              public datePicker: DatePicker,
+              private _alunoDao: AlunoDao) {
 
     if (navParams.get('aluno')) {
       this.aluno = navParams.get('aluno') as Aluno;
@@ -48,5 +50,10 @@ export class AddAlunoPage {
     })
     .then(data => this.aluno.nascimento = data.toISOString());
 
+  }
+
+  saveAluno(){
+    this._alunoDao.save(this.aluno);
+    this.navCtrl.pop();
   }
 }

@@ -3,13 +3,13 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { DatePicker } from "@ionic-native/date-picker";
-import { Pagamento } from "../../domain/pagamento/pagamento";
+import { Cobranca } from "../../domain/cobranca/cobranca";
 
 @Component({
   selector: 'page-add-cobranca',
   templateUrl: 'addCobranca.html'
 })
-export class AddcobrancaPage {
+export class AddCobrancaPage {
 
   cobranca: Cobranca = new Cobranca();
 
@@ -18,8 +18,8 @@ export class AddcobrancaPage {
               private storage: Storage, 
               public datePicker: DatePicker) {
 
-    if (navParams.get('pagamento')) {
-      this.pagamento = navParams.get('pagamento') as Pagamento;
+    if (navParams.get('cobranca')) {
+      this.cobranca = navParams.get('cobranca') as Cobranca;
     }
     
   }
@@ -30,7 +30,16 @@ export class AddcobrancaPage {
       date: new Date(), 
       mode: 'date'
     })
-    .then(data => this.pagamento.data = data.toISOString());
+    .then(data => this.cobranca.data = data.toISOString());
 
   }
+
+  saveCobranca(){
+
+  }
+
+  deleteCobranca(){
+
+  }
+  
 }

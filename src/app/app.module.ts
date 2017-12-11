@@ -17,6 +17,15 @@ import { TurmasPage } from "../pages/turmas/turmas";
 import { JogosPage } from "../pages/jogos/jogos";
 import { PagamentosPage } from "../pages/pagamentos/pagamentos";
 import { AddAlunoPage } from "../pages/addAluno/addAluno";
+import { CobrancasPage } from "../pages/cobrancas/cobrancas";
+import { AddTurmaPage } from "../pages/addTurma/addTurma";
+import { AddJogoPage } from "../pages/addJogo/addJogo";
+import { AddCobrancaPage } from "../pages/addCobranca/addCobranca";
+import { AddPagamentoPage } from "../pages/addPagamento/addPagamento";
+import { NumeradorDao } from "../domain/numerador/numerador-dao";
+import { AlunoDao } from "../domain/aluno/aluno-dao";
+import { EscolaDao } from "../domain/escola/escola-dao";
+import { TurmaDao } from "../domain/turma/turma-dao";
 
 @NgModule({
   declarations: [
@@ -28,7 +37,12 @@ import { AddAlunoPage } from "../pages/addAluno/addAluno";
     TurmasPage,
     JogosPage,
     PagamentosPage,
-    AddAlunoPage
+    CobrancasPage,
+    AddAlunoPage,
+    AddTurmaPage,
+    AddJogoPage,
+    AddPagamentoPage,
+    AddCobrancaPage
   ],
   imports: [
     BrowserModule,
@@ -45,13 +59,22 @@ import { AddAlunoPage } from "../pages/addAluno/addAluno";
     TurmasPage,
     JogosPage,
     PagamentosPage,
-    AddAlunoPage
+    CobrancasPage,
+    AddAlunoPage,
+    AddTurmaPage,
+    AddJogoPage,
+    AddPagamentoPage,
+    AddCobrancaPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Camera,
     DatePicker,
+    NumeradorDao,
+    AlunoDao,
+    EscolaDao,
+    TurmaDao,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

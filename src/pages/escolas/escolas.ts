@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { TabsPage } from "../tabs/tabs";
 import { Escola } from "../../domain/escola/escola";
 import { Aluno } from "../../domain/aluno/aluno";
+import { EscolaDao } from "../../domain/escola/escola-dao";
 
 @Component({
   selector: 'page-escolas',
@@ -13,7 +14,10 @@ export class EscolasPage {
 
   escolas: Escola[] = [];
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController, private storage: Storage) {
+  constructor(public navCtrl: NavController, 
+              private alertCtrl: AlertController, 
+              private storage: Storage,
+              private _escolaDao: EscolaDao) {
 
   }
 
@@ -80,7 +84,7 @@ export class EscolasPage {
             if(nomeEscola){
               let newescola = new Escola(nomeEscola, [new Aluno('Aluno A '+nomeEscola) , new Aluno('Aluno B '+nomeEscola)])
               this.escolas.push(newescola);
-              this.storage.set('escolas', this.escolas);
+              this._escolaDao.save(newescola);
             }else{
               this.showErrorAlert("Preencha o Nome da Escola!");
             }

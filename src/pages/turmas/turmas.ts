@@ -17,7 +17,7 @@ export class TurmasPage {
     
   }
 
-  ngOnInit(){
+  ionViewDidEnter(){
     this.loadTurmas();
     
   }

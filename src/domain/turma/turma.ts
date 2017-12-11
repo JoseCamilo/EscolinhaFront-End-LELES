@@ -4,7 +4,7 @@ export class Turma {
 
     constructor(
         public title: string = '',
-        public alunos: Aluno[] = null, 
+        public alunos: Aluno[] = [], 
         public confirmado: boolean = false,
         public _id = ''
     ) {}

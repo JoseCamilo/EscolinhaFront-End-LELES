@@ -1,3 +1,5 @@
+import { Aluno } from "../aluno/aluno";
+
 export class Jogo {
 
     constructor(
@@ -5,6 +7,7 @@ export class Jogo {
         public descricao: string = '',
         public data: string = new Date().toISOString(),
         public endereco: string = '',
+        public alunos: Aluno[] = [],
         public confirmado: boolean = false,
         public _id = ''
     ) {}

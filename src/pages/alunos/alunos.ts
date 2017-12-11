@@ -13,13 +13,13 @@ export class AlunosPage {
   alunos: Aluno[] = [];
   title: string;
 
-  constructor(public navCtrl: NavController, private storage: Storage) {
+  constructor(public navCtrl: NavController,
+              private storage: Storage) {
     
   }
 
-  ngOnInit(){
+  ionViewDidEnter(){
     this.loadAlunos();
-    
   }
 
   loadAlunos(){

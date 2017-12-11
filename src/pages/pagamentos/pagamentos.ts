@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Pagamento } from "../../domain/pagamento/pagamento";
 import { AddPagamentoPage } from "../addPagamento/addPagamento";
+import { Cobranca } from "../../domain/cobranca/cobranca";
+import { AddCobrancaPage } from "../addCobranca/addCobranca";
 
 @Component({
   selector: 'page-pagamentos',
@@ -12,23 +14,17 @@ export class PagamentosPage {
 
   title: string;
   pagamentos: Pagamento[] = [];
+  cobranca: Cobranca = new Cobranca();
 
-  constructor(public navCtrl: NavController, private storage: Storage) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private storage: Storage) {
     
-  }
-
-  ngOnInit(){
-    this.loadJogos();
-    
-  }
-
-  loadJogos(){
-    this.storage.get('setEscola').then((res) => {
-        if(res){
-          this.title = res.nome;
-          this.pagamentos = res.pagamentos;
-        }
-      });
+    if (navParams.get('cobranca')) {
+      this.cobranca = navParams.get('cobranca') as Cobranca;
+      this.title = this.cobranca.title;
+      this.pagamentos = this.cobranca.pagamentos;
+    }
   }
 
   addTurma(){
@@ -38,6 +34,12 @@ export class PagamentosPage {
   itemSelected(pagamento){
     this.navCtrl.push(AddPagamentoPage,{
       pagamento: pagamento
+    });
+  }
+
+  editCobranca(){
+    this.navCtrl.push(AddCobrancaPage, {
+      cobranca: this.cobranca
     });
   }
 
