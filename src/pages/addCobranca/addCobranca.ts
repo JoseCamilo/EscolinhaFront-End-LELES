@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { DatePicker } from "@ionic-native/date-picker";
 import { Cobranca } from "../../domain/cobranca/cobranca";
+import { CobrancaDao } from "../../domain/cobranca/cobranca-dao";
 
 @Component({
   selector: 'page-add-cobranca',
@@ -16,7 +17,8 @@ export class AddCobrancaPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
               private storage: Storage, 
-              public datePicker: DatePicker) {
+              public datePicker: DatePicker,
+              private _cobrancaDao: CobrancaDao) {
 
     if (navParams.get('cobranca')) {
       this.cobranca = navParams.get('cobranca') as Cobranca;
@@ -35,7 +37,8 @@ export class AddCobrancaPage {
   }
 
   saveCobranca(){
-
+    this._cobrancaDao.save(this.cobranca);
+    this.navCtrl.pop();
   }
 
   deleteCobranca(){

@@ -7,10 +7,10 @@ import { Aluno } from "./aluno";
 export class AlunoDao {
 
     constructor(private _storage: Storage,
-                private _dao: NumeradorDao) {}
+                private _numDao: NumeradorDao) {}
 
     private _getKey() {
-        return this._dao.getNum();
+        return this._numDao.getNum();
     }
 
     private _getIdEscola(){

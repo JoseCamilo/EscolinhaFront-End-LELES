@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>{{turma.title}}</h2>
+
+  <ion-list>
+    <ion-item *ngFor="let aluno of alunos" (click)="itemSelected(aluno)">
+      <ion-avatar item-start>
+        <img src={{aluno.avatar}}>
+      </ion-avatar>
+      <h2>{{aluno.nome}}</h2>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab mini (click)="addAluno()"><ion-icon name="create"></ion-icon></button>
+  </ion-fab>
+</ion-content>

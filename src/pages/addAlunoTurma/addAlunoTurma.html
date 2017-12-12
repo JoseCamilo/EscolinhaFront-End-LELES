@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{turma.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let item of alunosCkd">
+      <ion-checkbox [(ngModel)]="item.checked" checked="item.checked"></ion-checkbox>
+      <ion-avatar item-start>
+        <img src={{item.aluno.avatar}}>
+      </ion-avatar>
+      <ion-label>{{item.aluno.nome}}</ion-label>
+      
+    </ion-item>
+    
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab mini (click)="saveAlunos()"><ion-icon name="checkmark"></ion-icon></button>
+  </ion-fab>
+</ion-content>

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NumeradorDao } from "../numerador/numerador-dao";
-import { Aluno } from "../aluno/aluno";
-import { Turma } from "./turma";
+import { Cobranca } from "./cobranca";
 
 @Injectable()
-export class TurmaDao {
+export class CobrancaDao {
 
     constructor(private _storage: Storage,
                 private _numDao: NumeradorDao) {}
@@ -34,7 +33,7 @@ export class TurmaDao {
       });
     }
 
-    save(turma: Turma) {
+    save(cobranca: Cobranca) {
         return this._getIdEscola()
                     .then((idEscola) =>{
 
@@ -44,18 +43,18 @@ export class TurmaDao {
                                 let pos = escolas.map(function(e) { return e._id; });
                                 let posEscola = pos.indexOf(idEscola);
                                                                             
-                                if(turma._id){
-                                    let pos2 = escolas[posEscola].turmas.map(function(e) { return e._id; });
-                                    let posTurma = pos2.indexOf(turma._id);
-                                    escolas[posEscola].turmas[posTurma] = turma;
+                                if(cobranca._id){
+                                    let pos2 = escolas[posEscola].cobrancas.map(function(e) { return e._id; });
+                                    let poscobranca = pos2.indexOf(cobranca._id);
+                                    escolas[posEscola].cobrancas[poscobranca] = cobranca;
 
                                     this._storage.set('setEscola', escolas[posEscola]);
                                     return this._storage.set("escolas", escolas);
                                 }else{
                                     this._getKey()
                                         .then((key) => {
-                                            turma._id = key;
-                                            escolas[posEscola].turmas.push(turma);
+                                            cobranca._id = key;
+                                            escolas[posEscola].cobrancas.push(cobranca);
 
                                             this._storage.set('setEscola', escolas[posEscola]);                                        
                                             return this._storage.set("escolas", escolas);

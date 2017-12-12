@@ -17,7 +17,7 @@ export class JogosPage {
     
   }
 
-  ngOnInit(){
+  ionViewDidEnter(){
     this.loadJogos();
     
   }
@@ -31,7 +31,7 @@ export class JogosPage {
       });
   }
 
-  addTurma(){
+  addJogo(){
     this.navCtrl.push(AddJogoPage);
   }
 

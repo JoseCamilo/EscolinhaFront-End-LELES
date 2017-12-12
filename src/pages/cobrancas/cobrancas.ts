@@ -18,9 +18,8 @@ export class CobrancasPage {
     
   }
 
-  ngOnInit(){
+  ionViewDidEnter(){
     this.loadCobrancas();
-    
   }
 
   loadCobrancas(){

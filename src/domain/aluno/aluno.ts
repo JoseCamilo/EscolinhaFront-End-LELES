@@ -11,3 +11,11 @@ export class Aluno {
         public _id = ''
     ) {}
 }
+
+export class AlunoChecked {
+
+    constructor(
+        public checked: boolean = false,
+        public aluno: Aluno = new Aluno(),
+    ) {}
+}

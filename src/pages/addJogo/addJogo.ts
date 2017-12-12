@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { DatePicker } from "@ionic-native/date-picker";
 import { Jogo } from "../../domain/jogo/jogo";
+import { JogoDao } from "../../domain/jogo/jogo-dao";
 
 @Component({
   selector: 'page-add-jogo',
@@ -16,7 +17,8 @@ export class AddJogoPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
               private storage: Storage, 
-              public datePicker: DatePicker) {
+              public datePicker: DatePicker,
+              private _jogoDao: JogoDao) {
 
     if (navParams.get('jogo')) {
       this.jogo = navParams.get('jogo') as Jogo;
@@ -32,5 +34,10 @@ export class AddJogoPage {
     })
     .then(data => this.jogo.data = data.toISOString());
 
+  }
+
+  saveJogo(){
+    this._jogoDao.save(this.jogo);
+    this.navCtrl.pop();
   }
 }

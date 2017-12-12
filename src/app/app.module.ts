@@ -26,6 +26,10 @@ import { NumeradorDao } from "../domain/numerador/numerador-dao";
 import { AlunoDao } from "../domain/aluno/aluno-dao";
 import { EscolaDao } from "../domain/escola/escola-dao";
 import { TurmaDao } from "../domain/turma/turma-dao";
+import { CobrancaDao } from "../domain/cobranca/cobranca-dao";
+import { JogoDao } from "../domain/jogo/jogo-dao";
+import { AddAlunoTurmaPage } from "../pages/addAlunoTurma/addAlunoTurma";
+import { AlunosTurmaPage } from "../pages/alunos-turma/alunos-turma";
 
 @NgModule({
   declarations: [
@@ -42,7 +46,9 @@ import { TurmaDao } from "../domain/turma/turma-dao";
     AddTurmaPage,
     AddJogoPage,
     AddPagamentoPage,
-    AddCobrancaPage
+    AddCobrancaPage,
+    AlunosTurmaPage,
+    AddAlunoTurmaPage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +70,9 @@ import { TurmaDao } from "../domain/turma/turma-dao";
     AddTurmaPage,
     AddJogoPage,
     AddPagamentoPage,
-    AddCobrancaPage
+    AddCobrancaPage,
+    AlunosTurmaPage,
+    AddAlunoTurmaPage
   ],
   providers: [
     StatusBar,
@@ -75,6 +83,8 @@ import { TurmaDao } from "../domain/turma/turma-dao";
     AlunoDao,
     EscolaDao,
     TurmaDao,
+    JogoDao,
+    CobrancaDao,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
