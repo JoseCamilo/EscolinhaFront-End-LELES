@@ -40,4 +40,9 @@ export class AddJogoPage {
     this._jogoDao.save(this.jogo);
     this.navCtrl.pop();
   }
+
+  deleteJogo(){
+    this._jogoDao.delete(this.jogo);
+    this.navCtrl.popToRoot();
+  }
 }

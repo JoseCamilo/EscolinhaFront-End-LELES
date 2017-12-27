@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Cobranca } from "../../domain/cobranca/cobranca";
 import { AddCobrancaPage } from "../addCobranca/addCobranca";
 import { PagamentosPage } from "../pagamentos/pagamentos";
+import { EscolasPage } from "../escolas/escolas";
 
 @Component({
   selector: 'page-cobrancas',
@@ -14,7 +15,7 @@ export class CobrancasPage {
   title: string;
   cobrancas: Cobranca[] = [];
 
-  constructor(public navCtrl: NavController, private storage: Storage) {
+  constructor(public navCtrl: NavController, public appCtrl: App, private storage: Storage) {
     
   }
 
@@ -39,6 +40,10 @@ export class CobrancasPage {
     this.navCtrl.push(PagamentosPage,{
       cobranca: cobranca
     });
+  }
+
+  popToHome(){
+    this.appCtrl.getRootNav().setRoot(EscolasPage);
   }
 
 }

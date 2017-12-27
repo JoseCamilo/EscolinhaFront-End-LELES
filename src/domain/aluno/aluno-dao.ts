@@ -44,9 +44,26 @@ export class AlunoDao {
                                 let posEscola = pos.indexOf(idEscola);
                                                                             
                                 if(aluno._id){
+                                    // salva aluno
                                     let pos2 = escolas[posEscola].alunos.map(function(e) { return e._id; });
                                     let posAluno = pos2.indexOf(aluno._id);
                                     escolas[posEscola].alunos[posAluno] = aluno;
+
+                                    // salva aluno nas turmas da escola atual
+                                    for (var index = 0; index < escolas[posEscola].turmas.length; index++) {
+                                        
+                                        let pos3 = escolas[posEscola].turmas[index].alunos.map(function(e) { return e._id; });
+                                        let pos3Aluno = pos3.indexOf(aluno._id);
+                                        escolas[posEscola].turmas[index].alunos[pos3Aluno] = aluno;
+                                    }
+
+                                    // salva aluno nos jogos da escola atual
+                                    for (var index = 0; index < escolas[posEscola].jogos.length; index++) {
+                                        
+                                        let pos4 = escolas[posEscola].jogos[index].alunos.map(function(e) { return e._id; });
+                                        let pos4Aluno = pos4.indexOf(aluno._id);
+                                        escolas[posEscola].jogos[index].alunos[pos4Aluno] = aluno;
+                                    }
 
                                     this._storage.set('setEscola', escolas[posEscola]);
                                     return this._storage.set("escolas", escolas);
@@ -59,6 +76,28 @@ export class AlunoDao {
                                             this._storage.set('setEscola', escolas[posEscola]);                                        
                                             return this._storage.set("escolas", escolas);
                                         });
+                                }
+                            });
+                    });
+    }
+
+    delete(aluno: Aluno) {
+        return this._getIdEscola()
+                    .then((idEscola) =>{
+
+                        this._getEscolas()
+                            .then((dados) => {
+                                let escolas = dados;
+                                let pos = escolas.map(function(e) { return e._id; });
+                                let posEscola = pos.indexOf(idEscola);
+                                                                            
+                                if(aluno._id){
+                                    let pos2 = escolas[posEscola].alunos.map(function(e) { return e._id; });
+                                    let posAluno = pos2.indexOf(aluno._id);
+                                    escolas[posEscola].alunos.splice(posAluno,1);
+
+                                    this._storage.set('setEscola', escolas[posEscola]);
+                                    return this._storage.set("escolas", escolas);
                                 }
                             });
                     });

@@ -5,22 +5,24 @@ import { Aluno } from "../../domain/aluno/aluno";
 import { AddAlunoPage } from "../addAluno/addAluno";
 import { Turma } from "../../domain/turma/turma";
 import { AddAlunoTurmaPage } from "../addAlunoTurma/addAlunoTurma";
+import { Jogo } from "../../domain/jogo/jogo";
+import { AddAlunoJogoPage } from "../addAlunoJogo/addAlunoJogo";
 
 @Component({
-  selector: 'page-alunos-turma',
-  templateUrl: 'alunos-turma.html'
+  selector: 'page-alunos-jogo',
+  templateUrl: 'alunosJogo.html'
 })
-export class AlunosTurmaPage {
+export class AlunosJogoPage {
 
   alunos: Aluno[] = [];
-  turma: Turma = new Turma()
+  jogo: Jogo = new Jogo()
   title: string;
 
   constructor(public navCtrl: NavController,
               private storage: Storage,
               public navParams: NavParams) {
-    if (navParams.get('turma')) {
-      this.turma = navParams.get('turma') as Turma;
+    if (navParams.get('jogo')) {
+      this.jogo = navParams.get('jogo') as Jogo;
     }
   }
 
@@ -33,16 +35,18 @@ export class AlunosTurmaPage {
         if(res){
           this.title = res.nome;
 
-          let pos = res.turmas.map(function(e) { return e._id; });
-          let posTurma = pos.indexOf(this.turma._id);
+          let pos = res.jogos.map(function(e) { return e._id; });
+          let posJogo = pos.indexOf(this.jogo._id);
 
-          this.alunos = res.turmas[posTurma].alunos;
+          this.alunos = res.jogos[posJogo].alunos;
         }
       });
   }
 
   addAluno(){
-    this.navCtrl.push(AddAlunoTurmaPage);
+    this.navCtrl.push(AddAlunoJogoPage,{
+      jogo: this.jogo
+    });
   }
 
   itemSelected(aluno){

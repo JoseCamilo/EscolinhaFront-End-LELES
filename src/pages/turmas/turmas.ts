@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Turma } from "../../domain/turma/turma";
 import { AddTurmaPage } from "../addTurma/addTurma";
-import { AlunosTurmaPage } from "../alunos-turma/alunos-turma";
+import { AlunosTurmaPage } from "../alunosTurma/alunosTurma";
+import { EscolasPage } from "../escolas/escolas";
 
 @Component({
   selector: 'page-turmas',
@@ -14,7 +15,7 @@ export class TurmasPage {
   title: string;
   turmas: Turma[] = [];
 
-  constructor(public navCtrl: NavController, private storage: Storage) {
+  constructor(public navCtrl: NavController, public appCtrl: App, private storage: Storage) {
     
   }
 
@@ -42,4 +43,7 @@ export class TurmasPage {
     });
   }
 
+  popToHome(){
+    this.appCtrl.getRootNav().setRoot(EscolasPage);
+  }
 }

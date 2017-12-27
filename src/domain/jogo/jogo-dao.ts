@@ -63,5 +63,27 @@ export class JogoDao {
                             });
                     });
     }
+
+    delete(jogo: Jogo) {
+        return this._getIdEscola()
+                    .then((idEscola) =>{
+
+                        this._getEscolas()
+                            .then((dados) => {
+                                let escolas = dados;
+                                let pos = escolas.map(function(e) { return e._id; });
+                                let posEscola = pos.indexOf(idEscola);
+                                                                            
+                                if(jogo._id){
+                                    let pos2 = escolas[posEscola].jogos.map(function(e) { return e._id; });
+                                    let posjogo = pos2.indexOf(jogo._id);
+                                    escolas[posEscola].jogos.splice(posjogo, 1);
+
+                                    this._storage.set('setEscola', escolas[posEscola]);
+                                    return this._storage.set("escolas", escolas);
+                                }
+                            });
+                    });
+    }
          
 }

@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Jogo } from "../../domain/jogo/jogo";
 import { AddJogoPage } from "../addJogo/addJogo";
+import { AddAlunoJogoPage } from "../addAlunoJogo/addAlunoJogo";
+import { EscolasPage } from "../escolas/escolas";
+import { AlunosJogoPage } from "../alunosJogo/alunosJogo";
 
 @Component({
   selector: 'page-jogos',
@@ -13,7 +16,7 @@ export class JogosPage {
   title: string;
   jogos: Jogo[] = [];
 
-  constructor(public navCtrl: NavController, private storage: Storage) {
+  constructor(public navCtrl: NavController, public appCtrl: App, private storage: Storage) {
     
   }
 
@@ -36,9 +39,13 @@ export class JogosPage {
   }
 
   itemSelected(jogo){
-    this.navCtrl.push(AddJogoPage,{
+    this.navCtrl.push(AlunosJogoPage,{
       jogo: jogo
     });
+  }
+
+  popToHome(){
+    this.appCtrl.getRootNav().setRoot(EscolasPage);
   }
 
 }

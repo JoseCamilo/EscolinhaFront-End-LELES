@@ -42,7 +42,8 @@ export class AddCobrancaPage {
   }
 
   deleteCobranca(){
-
+    this._cobrancaDao.delete(this.cobranca);
+    this.navCtrl.popToRoot();
   }
   
 }

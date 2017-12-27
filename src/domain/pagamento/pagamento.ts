@@ -1,7 +1,9 @@
+import { Aluno } from "../aluno/aluno";
+
 export class Pagamento {
 
     constructor(
-        public aluno: string = '',
+        public aluno: Aluno = new Aluno(),
         public valor: string = '',
         public data: string = new Date().toISOString(),
         public confirmado: boolean = false,

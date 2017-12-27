@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ViewController, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Aluno } from "../../domain/aluno/aluno";
 import { AddAlunoPage } from "../addAluno/addAluno";
+import { EscolasPage } from "../escolas/escolas";
 
 @Component({
   selector: 'page-alunos',
@@ -14,6 +15,8 @@ export class AlunosPage {
   title: string;
 
   constructor(public navCtrl: NavController,
+              public viewCtrl: ViewController,
+              public appCtrl: App,
               private storage: Storage) {
     
   }
@@ -39,5 +42,9 @@ export class AlunosPage {
     this.navCtrl.push(AddAlunoPage,{
       aluno: aluno
     });
+  }
+
+  popToHome(){
+    this.appCtrl.getRootNav().setRoot(EscolasPage);
   }
 }

@@ -26,4 +26,9 @@ export class AddTurmaPage {
     this._turmaDao.save(this.turma);
     this.navCtrl.pop();
   }
+
+  deleteTurma(){
+    this._turmaDao.delete(this.turma);
+    this.navCtrl.popToRoot();
+  }
 }

@@ -63,5 +63,27 @@ export class CobrancaDao {
                             });
                     });
     }
+
+    delete(cobranca: Cobranca) {
+        return this._getIdEscola()
+                    .then((idEscola) =>{
+
+                        this._getEscolas()
+                            .then((dados) => {
+                                let escolas = dados;
+                                let pos = escolas.map(function(e) { return e._id; });
+                                let posEscola = pos.indexOf(idEscola);
+                                                                            
+                                if(cobranca._id){
+                                    let pos2 = escolas[posEscola].cobrancas.map(function(e) { return e._id; });
+                                    let poscobranca = pos2.indexOf(cobranca._id);
+                                    escolas[posEscola].cobrancas.splice(poscobranca,1);
+
+                                    this._storage.set('setEscola', escolas[posEscola]);
+                                    return this._storage.set("escolas", escolas);
+                                }
+                            });
+                    });
+    }
          
 }

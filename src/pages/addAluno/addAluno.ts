@@ -56,4 +56,9 @@ export class AddAlunoPage {
     this._alunoDao.save(this.aluno);
     this.navCtrl.pop();
   }
+
+  deleteAluno(){
+    this._alunoDao.delete(this.aluno);
+    this.navCtrl.pop();
+  }
 }

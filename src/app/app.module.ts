@@ -29,7 +29,9 @@ import { TurmaDao } from "../domain/turma/turma-dao";
 import { CobrancaDao } from "../domain/cobranca/cobranca-dao";
 import { JogoDao } from "../domain/jogo/jogo-dao";
 import { AddAlunoTurmaPage } from "../pages/addAlunoTurma/addAlunoTurma";
-import { AlunosTurmaPage } from "../pages/alunos-turma/alunos-turma";
+import { AlunosTurmaPage } from "../pages/alunosTurma/alunosTurma";
+import { AddAlunoJogoPage } from "../pages/addAlunoJogo/addAlunoJogo";
+import { AlunosJogoPage } from "../pages/alunosJogo/alunosJogo";
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { AlunosTurmaPage } from "../pages/alunos-turma/alunos-turma";
     AddPagamentoPage,
     AddCobrancaPage,
     AlunosTurmaPage,
-    AddAlunoTurmaPage
+    AddAlunoTurmaPage,
+    AddAlunoJogoPage,
+    AlunosJogoPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +76,9 @@ import { AlunosTurmaPage } from "../pages/alunos-turma/alunos-turma";
     AddPagamentoPage,
     AddCobrancaPage,
     AlunosTurmaPage,
-    AddAlunoTurmaPage
+    AddAlunoTurmaPage,
+    AddAlunoJogoPage,
+    AlunosJogoPage
   ],
   providers: [
     StatusBar,

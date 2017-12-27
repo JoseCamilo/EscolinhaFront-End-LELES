@@ -3,20 +3,18 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Aluno, AlunoChecked } from "../../domain/aluno/aluno";
 
-import { Camera } from '@ionic-native/camera';
-import { DatePicker } from "@ionic-native/date-picker";
 import { AlunoDao } from "../../domain/aluno/aluno-dao";
-import { Turma } from "../../domain/turma/turma";
-import { TurmaDao } from "../../domain/turma/turma-dao";
-import { AddTurmaPage } from "../addTurma/addTurma";
+import { AddJogoPage } from "../addJogo/addJogo";
+import { Jogo } from "../../domain/jogo/jogo";
+import { JogoDao } from "../../domain/jogo/jogo-dao";
 
 @Component({
-  selector: 'page-add-aluno-turma',
-  templateUrl: 'addAlunoTurma.html'
+  selector: 'page-add-aluno-jogo',
+  templateUrl: 'addAlunoJogo.html'
 })
-export class AddAlunoTurmaPage {
+export class AddAlunoJogoPage {
 
-  turma: Turma = new Turma();
+  jogo: Jogo = new Jogo();
   alunos: Aluno[] = [];
   title: string;
   alunosCkd: AlunoChecked[] = [];
@@ -24,13 +22,11 @@ export class AddAlunoTurmaPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
               private storage: Storage, 
-              private camera: Camera,
-              public datePicker: DatePicker,
               private _alunoDao: AlunoDao,
-              private _turmaDao: TurmaDao) {
+              private _jogoDao: JogoDao) {
 
-    if (navParams.get('turma')) {
-      this.turma = navParams.get('turma') as Turma;
+    if (navParams.get('jogo')) {
+      this.jogo = navParams.get('jogo') as Jogo;
     }
     
   }
@@ -43,8 +39,7 @@ export class AddAlunoTurmaPage {
     this.alunosCkd = [];
     this.storage.get('setEscola').then((res) => {
         if(res){
-          this.title = res.nome;
-          let pos = this.turma.alunos.map(function(e) { return e._id; });          
+          let pos = this.jogo.alunos.map(function(e) { return e._id; });          
 
           res.alunos.forEach(element => {
             let posAluno = pos.indexOf(element._id);
@@ -60,20 +55,20 @@ export class AddAlunoTurmaPage {
   
 
   saveAlunos(){
-    this.turma.alunos = [];
+    this.jogo.alunos = [];
     this.alunosCkd.forEach(element =>{
       if (element.checked) {
-        this.turma.alunos.push(element.aluno);
+        this.jogo.alunos.push(element.aluno);
       }
     });
 
-    this._turmaDao.save(this.turma);
+    this._jogoDao.save(this.jogo);
     this.navCtrl.pop();
   }
 
-  editTurma(){
-    this.navCtrl.push(AddTurmaPage, {
-      turma : this.turma
+  editJogo(){
+    this.navCtrl.push(AddJogoPage, {
+      jogo : this.jogo
     });
   }
 }

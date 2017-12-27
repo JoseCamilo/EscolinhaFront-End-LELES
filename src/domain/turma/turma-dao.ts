@@ -64,5 +64,27 @@ export class TurmaDao {
                             });
                     });
     }
+
+    delete(turma: Turma) {
+        return this._getIdEscola()
+                    .then((idEscola) =>{
+
+                        this._getEscolas()
+                            .then((dados) => {
+                                let escolas = dados;
+                                let pos = escolas.map(function(e) { return e._id; });
+                                let posEscola = pos.indexOf(idEscola);
+                                                                            
+                                if(turma._id){
+                                    let pos2 = escolas[posEscola].turmas.map(function(e) { return e._id; });
+                                    let posTurma = pos2.indexOf(turma._id);
+                                    escolas[posEscola].turmas.splice(posTurma, 1);
+
+                                    this._storage.set('setEscola', escolas[posEscola]);
+                                    return this._storage.set("escolas", escolas);
+                                }
+                            });
+                    });
+    }
          
 }
