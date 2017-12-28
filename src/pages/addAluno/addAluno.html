@@ -8,12 +8,9 @@
 <ion-content padding>
 
   <ion-item>
-      <ion-avatar item-left *ngIf="aluno.avatar">
+      <ion-avatar *ngIf="aluno.avatar" (click)="tiraFoto()">
         <img [src]="aluno.avatar">
       </ion-avatar>
-      <button ion-button outline item-right (click)="tiraFoto()">
-          <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
-      </button>
   </ion-item>
 
   <ion-list>

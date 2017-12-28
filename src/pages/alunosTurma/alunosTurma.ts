@@ -14,7 +14,6 @@ export class AlunosTurmaPage {
 
   alunos: Aluno[] = [];
   turma: Turma = new Turma()
-  title: string;
 
   constructor(public navCtrl: NavController,
               private storage: Storage,
@@ -31,8 +30,6 @@ export class AlunosTurmaPage {
   loadAlunos(){
     this.storage.get('setEscola').then((res) => {
         if(res){
-          this.title = res.nome;
-
           let pos = res.turmas.map(function(e) { return e._id; });
           let posTurma = pos.indexOf(this.turma._id);
 

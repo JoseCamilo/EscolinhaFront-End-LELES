@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{title}}</ion-title>
+    <ion-title>{{cobranca.title}}</ion-title>
     
     <ion-buttons end>
       <button ion-button icon-only (click)="editCobranca()">
@@ -12,15 +12,31 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Pagamentos</h2>
+  <h2>Devedores</h2>
 
   <ion-list>
-    <ion-item *ngFor="let pagamento of pagamentos" (click)="itemSelected(pagamento)">
-      {{pagamento.title}}
+    <ion-item *ngFor="let aluno of alunosDev">
+      <ion-avatar item-start>
+        <img src={{aluno.avatar}}>
+      </ion-avatar>
+      <h2>{{aluno.nome}}</h2>
+      <ion-icon name="checkmark-circle" color="danger" item-end (click)="addPagamento(aluno)"></ion-icon>
     </ion-item>
   </ion-list>
 
-  <ion-fab right bottom>
-    <button ion-fab mini (click)="addPagamento()"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
+  <div style="text-align: center;">
+    <h5 *ngIf='!showPag' (click)="showPag=!showPag">Mostrar Pagantes</h5>
+    <h5 *ngIf='showPag' (click)="showPag=!showPag">Ocultar Pagantes</h5>
+  </div>
+  
+  <ion-list *ngIf='showPag'>
+    <ion-item *ngFor="let aluno of alunosPag">
+      <ion-avatar item-start>
+        <img src={{aluno.avatar}}>
+      </ion-avatar>
+      <h2>{{aluno.nome}}</h2>
+      <ion-icon name="checkmark-circle" color="primary" item-start (click)="lookPagamento(aluno)"></ion-icon>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

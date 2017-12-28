@@ -16,7 +16,6 @@ export class AlunosJogoPage {
 
   alunos: Aluno[] = [];
   jogo: Jogo = new Jogo()
-  title: string;
 
   constructor(public navCtrl: NavController,
               private storage: Storage,
@@ -33,8 +32,6 @@ export class AlunosJogoPage {
   loadAlunos(){
     this.storage.get('setEscola').then((res) => {
         if(res){
-          this.title = res.nome;
-
           let pos = res.jogos.map(function(e) { return e._id; });
           let posJogo = pos.indexOf(this.jogo._id);
 

@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Aluno } from "../../domain/aluno/aluno";
 
-import { Camera } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DatePicker } from "@ionic-native/date-picker";
 import { AlunoDao } from "../../domain/aluno/aluno-dao";
 
@@ -31,12 +31,19 @@ export class AddAlunoPage {
   }
   
   tiraFoto() {
-      
-    this.camera.getPicture({
+    
+    const options: CameraOptions = {
+      quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 100,
+      targetHeight: 100,
       saveToPhotoAlbum: true, 
       correctOrientation: true
-    }).then(url => {
+    };
+
+    this.camera.getPicture(options).then(url => {
       this.aluno.avatar = url;
     })
     .catch(err => console.log(err));
