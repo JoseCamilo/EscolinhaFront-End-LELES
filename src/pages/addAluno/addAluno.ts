@@ -37,7 +37,7 @@ export class AddAlunoPage {
       saveToPhotoAlbum: true, 
       correctOrientation: true
     }).then(url => {
-      this.url = url;
+      this.aluno.avatar = url;
     })
     .catch(err => console.log(err));
   }

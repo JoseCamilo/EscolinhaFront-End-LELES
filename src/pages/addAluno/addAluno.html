@@ -8,8 +8,8 @@
 <ion-content padding>
 
   <ion-item>
-      <ion-avatar item-left *ngIf="url">
-        <img [src]="url">
+      <ion-avatar item-left *ngIf="aluno.avatar">
+        <img [src]="aluno.avatar">
       </ion-avatar>
       <button ion-button outline item-right (click)="tiraFoto()">
           <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
