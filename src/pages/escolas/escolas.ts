@@ -82,7 +82,7 @@ export class EscolasPage {
           handler: data => {
             let nomeEscola = data.nome;
             if(nomeEscola){
-              let newescola = new Escola(nomeEscola, [new Aluno('Aluno A '+nomeEscola) , new Aluno('Aluno B '+nomeEscola)])
+              let newescola = new Escola(nomeEscola)
               this.escolas.push(newescola);
               this._escolaDao.save(newescola);
             }else{

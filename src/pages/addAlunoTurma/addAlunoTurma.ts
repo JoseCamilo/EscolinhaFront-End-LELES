@@ -67,8 +67,9 @@ export class AddAlunoTurmaPage {
       }
     });
 
-    this._turmaDao.save(this.turma);
-    this.navCtrl.pop();
+    this._turmaDao.save(this.turma)
+      .then(res => this.navCtrl.pop())
+      .catch(err => console.log(err));
   }
 
   editTurma(){

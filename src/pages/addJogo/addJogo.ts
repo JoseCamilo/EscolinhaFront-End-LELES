@@ -37,12 +37,14 @@ export class AddJogoPage {
   }
 
   saveJogo(){
-    this._jogoDao.save(this.jogo);
-    this.navCtrl.pop();
+    this._jogoDao.save(this.jogo)
+      .then(res => this.navCtrl.pop())
+      .catch(err => console.log(err));
   }
 
   deleteJogo(){
-    this._jogoDao.delete(this.jogo);
-    this.navCtrl.popToRoot();
+    this._jogoDao.delete(this.jogo)
+      .then(res => this.navCtrl.popToRoot())
+      .catch(err => console.log(err));
   }
 }

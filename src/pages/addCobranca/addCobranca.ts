@@ -37,13 +37,15 @@ export class AddCobrancaPage {
   }
 
   saveCobranca(){
-    this._cobrancaDao.save(this.cobranca);
-    this.navCtrl.pop();
+    this._cobrancaDao.save(this.cobranca)
+      .then(res => this.navCtrl.pop())
+      .catch(err => console.log(err));
   }
 
   deleteCobranca(){
-    this._cobrancaDao.delete(this.cobranca);
-    this.navCtrl.popToRoot();
+    this._cobrancaDao.delete(this.cobranca)
+      .then(res => this.navCtrl.popToRoot())
+      .catch(err => console.log(err));
   }
   
 }

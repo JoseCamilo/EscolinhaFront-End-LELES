@@ -37,7 +37,7 @@ export class CobrancaDao {
         return this._getIdEscola()
                     .then((idEscola) =>{
 
-                        this._getEscolas()
+                        return this._getEscolas()
                             .then((dados) => {
                                 let escolas = dados;
                                 let pos = escolas.map(function(e) { return e._id; });
@@ -68,7 +68,7 @@ export class CobrancaDao {
         return this._getIdEscola()
                     .then((idEscola) =>{
 
-                        this._getEscolas()
+                        return this._getEscolas()
                             .then((dados) => {
                                 let escolas = dados;
                                 let pos = escolas.map(function(e) { return e._id; });

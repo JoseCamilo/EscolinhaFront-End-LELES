@@ -36,8 +36,8 @@ export class AlunoDao {
     save(aluno: Aluno) {
         return this._getIdEscola()
                     .then((idEscola) =>{
-
-                        this._getEscolas()
+                        
+                       return this._getEscolas()
                             .then((dados) => {
                                 let escolas = dados;
                                 let pos = escolas.map(function(e) { return e._id; });
@@ -89,7 +89,7 @@ export class AlunoDao {
         return this._getIdEscola()
                     .then((idEscola) =>{
 
-                        this._getEscolas()
+                        return this._getEscolas()
                             .then((dados) => {
                                 let escolas = dados;
                                 let pos = escolas.map(function(e) { return e._id; });
@@ -99,7 +99,7 @@ export class AlunoDao {
                                     let pos2 = escolas[posEscola].alunos.map(function(e) { return e._id; });
                                     let posAluno = pos2.indexOf(aluno._id);
                                     escolas[posEscola].alunos.splice(posAluno,1);
-
+                                    console.log("delete aluno");
                                     this._storage.set('setEscola', escolas[posEscola]);
                                     return this._storage.set("escolas", escolas);
                                 }

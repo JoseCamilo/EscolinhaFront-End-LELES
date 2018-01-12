@@ -62,8 +62,9 @@ export class AddAlunoJogoPage {
       }
     });
 
-    this._jogoDao.save(this.jogo);
-    this.navCtrl.pop();
+    this._jogoDao.save(this.jogo)
+      .then(res => this.navCtrl.pop())
+      .catch(err => console.log(err));
   }
 
   editJogo(){

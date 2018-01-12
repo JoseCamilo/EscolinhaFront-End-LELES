@@ -14,8 +14,6 @@ import { AlunoDao } from "../../domain/aluno/aluno-dao";
 export class AddAlunoPage {
 
   aluno: Aluno = new Aluno();
-  title: string;
-  url: string = 'http://www.precision-spine.com/wp-content/uploads/2015/09/person-icon.png';
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
@@ -60,12 +58,15 @@ export class AddAlunoPage {
   }
 
   saveAluno(){
-    this._alunoDao.save(this.aluno);
-    this.navCtrl.pop();
+    this._alunoDao.save(this.aluno)
+      .then(res => this.navCtrl.pop())
+      .catch(err => console.log(err));
+    
   }
 
   deleteAluno(){
-    this._alunoDao.delete(this.aluno);
-    this.navCtrl.pop();
+    this._alunoDao.delete(this.aluno)
+    .then(res => this.navCtrl.pop())
+    .catch(err => console.log(err));
   }
 }

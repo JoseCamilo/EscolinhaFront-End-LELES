@@ -23,12 +23,14 @@ export class AddTurmaPage {
   }
 
   saveTurma(){
-    this._turmaDao.save(this.turma);
-    this.navCtrl.pop();
+    this._turmaDao.save(this.turma)
+      .then(res => this.navCtrl.pop())
+      .catch(err => console.log(err));
   }
 
   deleteTurma(){
-    this._turmaDao.delete(this.turma);
-    this.navCtrl.popToRoot();
+    this._turmaDao.delete(this.turma)
+      .then(res => this.navCtrl.popToRoot())
+      .catch(err => console.log(err));
   }
 }
