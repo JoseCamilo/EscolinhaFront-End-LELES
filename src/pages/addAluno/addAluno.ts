@@ -37,8 +37,8 @@ export class AddAlunoPage {
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      targetWidth: 100,
-      targetHeight: 100,
+      targetWidth: 300,
+      targetHeight: 300,
       saveToPhotoAlbum: true, 
       correctOrientation: true
     };
