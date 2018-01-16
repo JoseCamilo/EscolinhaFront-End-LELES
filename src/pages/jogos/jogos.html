@@ -14,9 +14,18 @@
   <h2>Jogos</h2>
 
   <ion-list>
-    <ion-item *ngFor="let jogo of jogos" (click)="itemSelected(jogo)">
-      {{jogo.title}}
-    </ion-item>
+      <ion-item-sliding *ngFor="let jogo of filterJogosOfDelete()">
+        <ion-item [class.falha]="!jogo.confirmado" [class.deletado]="jogo.deletado" (click)="itemSelected(jogo)">
+          {{jogo.title}}
+        </ion-item>
+        <ion-item-options side="right">
+          <button 
+            ion-button *ngIf="!jogo.confirmado" 
+            (click)="reenvia(jogo)">
+              Reenviar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
   </ion-list>
 
   <ion-fab right bottom>

@@ -6,6 +6,7 @@ export class Turma {
         public title: string = '',
         public alunos: Aluno[] = [], 
         public confirmado: boolean = false,
+        public deletado: boolean = false,
         public _id = ''
     ) {}
 }

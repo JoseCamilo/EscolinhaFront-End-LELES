@@ -42,8 +42,12 @@ export class AlunoDao {
                                 let escolas = dados;
                                 let pos = escolas.map(function(e) { return e._id; });
                                 let posEscola = pos.indexOf(idEscola);
-                                                                            
+                                
+                                                                                                           
                                 if(aluno._id){
+                                    // marca como alterado
+                                    aluno.confirmado = false;
+
                                     // salva aluno
                                     let pos2 = escolas[posEscola].alunos.map(function(e) { return e._id; });
                                     let posAluno = pos2.indexOf(aluno._id);
@@ -98,8 +102,10 @@ export class AlunoDao {
                                 if(aluno._id){
                                     let pos2 = escolas[posEscola].alunos.map(function(e) { return e._id; });
                                     let posAluno = pos2.indexOf(aluno._id);
-                                    escolas[posEscola].alunos.splice(posAluno,1);
-                                    console.log("delete aluno");
+                                    //escolas[posEscola].alunos.splice(posAluno,1);
+                                    escolas[posEscola].alunos[posAluno].deletado = true;
+                                    escolas[posEscola].alunos[posAluno].confirmado = false;
+                                    
                                     this._storage.set('setEscola', escolas[posEscola]);
                                     return this._storage.set("escolas", escolas);
                                 }

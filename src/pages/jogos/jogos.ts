@@ -3,9 +3,9 @@ import { NavController, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Jogo } from "../../domain/jogo/jogo";
 import { AddJogoPage } from "../addJogo/addJogo";
-import { AddAlunoJogoPage } from "../addAlunoJogo/addAlunoJogo";
 import { EscolasPage } from "../escolas/escolas";
 import { AlunosJogoPage } from "../alunosJogo/alunosJogo";
+import { JogoDao } from "../../domain/jogo/jogo-dao";
 
 @Component({
   selector: 'page-jogos',
@@ -16,7 +16,10 @@ export class JogosPage {
   title: string;
   jogos: Jogo[] = [];
 
-  constructor(public navCtrl: NavController, public appCtrl: App, private storage: Storage) {
+  constructor(public navCtrl: NavController, 
+              public appCtrl: App, 
+              private storage: Storage,
+              private _jogoDao: JogoDao) {
     
   }
 
@@ -34,6 +37,10 @@ export class JogosPage {
       });
   }
 
+  filterJogosOfDelete(){
+    return this.jogos.filter(x => !(x.deletado && x.confirmado));
+  }
+
   addJogo(){
     this.navCtrl.push(AddJogoPage);
   }
@@ -48,4 +55,10 @@ export class JogosPage {
     this.appCtrl.getRootNav().setRoot(EscolasPage);
   }
 
+  reenvia(jogo){
+    jogo.confirmado = true;
+    this._jogoDao.save(jogo)
+      .then(res => this.loadJogos())
+      .catch(err => console.log(err));
+  }
 }

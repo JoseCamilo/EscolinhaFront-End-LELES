@@ -9,9 +9,23 @@
 <ion-content padding>
   
   <ion-list>
-    <button ion-item *ngFor="let escola of escolas" (click)="itemSelected(escola)">
-      {{ escola.nome }}
-    </button>  
+      <ion-item-sliding *ngFor="let escola of filterEscolasOfDelete()">
+        <ion-item [class.falha]="!escola.confirmado" [class.deletado]="escola.deletado" (click)="itemSelected(escola)">
+          {{ escola.nome }}
+        </ion-item>
+        <ion-item-options side="right">
+          <button 
+            ion-button *ngIf="!escola.confirmado" 
+            (click)="reenvia(escola)">
+              Reenviar
+          </button>
+          <button color="danger"
+            ion-button *ngIf="!escola.deletado" 
+            (click)="deletaEscola(escola)">
+              Deletar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
   </ion-list>
 
   <button ion-button full (click)="newEscola()">Nova Escola</button>

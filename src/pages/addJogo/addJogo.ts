@@ -16,7 +16,6 @@ export class AddJogoPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
-              private storage: Storage, 
               public datePicker: DatePicker,
               private _jogoDao: JogoDao) {
 

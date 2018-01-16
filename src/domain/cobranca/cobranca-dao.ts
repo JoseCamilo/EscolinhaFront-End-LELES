@@ -77,7 +77,8 @@ export class CobrancaDao {
                                 if(cobranca._id){
                                     let pos2 = escolas[posEscola].cobrancas.map(function(e) { return e._id; });
                                     let poscobranca = pos2.indexOf(cobranca._id);
-                                    escolas[posEscola].cobrancas.splice(poscobranca,1);
+                                    //escolas[posEscola].cobrancas.splice(poscobranca,1);
+                                    escolas[posEscola].cobrancas[poscobranca].deletado = true;
 
                                     this._storage.set('setEscola', escolas[posEscola]);
                                     return this._storage.set("escolas", escolas);

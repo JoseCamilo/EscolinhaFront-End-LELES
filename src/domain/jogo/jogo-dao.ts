@@ -77,7 +77,8 @@ export class JogoDao {
                                 if(jogo._id){
                                     let pos2 = escolas[posEscola].jogos.map(function(e) { return e._id; });
                                     let posjogo = pos2.indexOf(jogo._id);
-                                    escolas[posEscola].jogos.splice(posjogo, 1);
+                                    //escolas[posEscola].jogos.splice(posjogo, 1);
+                                    escolas[posEscola].jogos[posjogo].deletado = true;
 
                                     this._storage.set('setEscola', escolas[posEscola]);
                                     return this._storage.set("escolas", escolas);

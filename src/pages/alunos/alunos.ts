@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 import { Aluno } from "../../domain/aluno/aluno";
 import { AddAlunoPage } from "../addAluno/addAluno";
 import { EscolasPage } from "../escolas/escolas";
+import { AlunoDao } from "../../domain/aluno/aluno-dao";
+import { WsEscolas } from "../../providers/wsEscolas";
 
 @Component({
   selector: 'page-alunos',
@@ -17,7 +19,9 @@ export class AlunosPage {
   constructor(public navCtrl: NavController,
               public viewCtrl: ViewController,
               public appCtrl: App,
-              private storage: Storage) {
+              private storage: Storage,
+              private _alunoDao: AlunoDao,
+              private _wsEscolas: WsEscolas) {
     
   }
 
@@ -34,6 +38,10 @@ export class AlunosPage {
       });
   }
 
+  filterAlunosOfDelete(){
+    return this.alunos.filter(x => !(x.deletado && x.confirmado));
+  }
+
   addAluno(){
     this.navCtrl.push(AddAlunoPage);
   }
@@ -46,5 +54,11 @@ export class AlunosPage {
 
   popToHome(){
     this.appCtrl.getRootNav().setRoot(EscolasPage);
+  }
+
+  reenvia(aluno){
+    this._wsEscolas.reenviaEscolas()
+      .then(res => this.loadAlunos())
+      .catch(err => console.log(err));
   }
 }

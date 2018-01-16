@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Pagamento } from "../../domain/pagamento/pagamento";
-import { AddPagamentoPage } from "../addPagamento/addPagamento";
 import { Cobranca } from "../../domain/cobranca/cobranca";
 import { AddCobrancaPage } from "../addCobranca/addCobranca";
 import { Aluno } from "../../domain/aluno/aluno";
@@ -41,11 +40,17 @@ export class PagamentosPage {
           let pos = this.cobranca.pagamentos.map(function(e) { return e.aluno._id; });          
 
           res.alunos.forEach(element => {
-            let posAluno = pos.indexOf(element._id);
-            if(posAluno >= 0){
-              this.alunosPag.push(element);
-            }else{
-              this.alunosDev.push(element);
+            if (this.cobranca.data > element.inscricao){
+              let posAluno = pos.indexOf(element._id);
+
+              if(posAluno >= 0 && this.cobranca.pagamentos[posAluno].pago){
+                this.alunosPag.push(element);
+              }else if(posAluno >= 0 && !this.cobranca.pagamentos[posAluno].pago){
+                this.alunosDev.push(element);
+              }else{
+                element.confirmado = true;
+                this.alunosDev.push(element);
+              }
             }
           });
         }
@@ -59,7 +64,7 @@ export class PagamentosPage {
       inputs: [
         {
           name: 'valor',
-          value: '80',
+          value: this.cobranca.valor,
           placeholder: 'Valor'
         },
       ],
@@ -109,7 +114,6 @@ export class PagamentosPage {
   }
 
   showConfirmEstorno(posPag) {
-    var that = this;
     let confirm = this.alertCtrl.create({
       title: 'Estornar',
       message: 'Tem certeza que deseja estornar?',
@@ -123,7 +127,8 @@ export class PagamentosPage {
         {
           text: 'Sim',
           handler: () => {
-            this.cobranca.pagamentos.splice(posPag,1);
+            //this.cobranca.pagamentos.splice(posPag,1);
+            this.cobranca.pagamentos[posPag].pago = false;
             this._cobrancaDao.save(this.cobranca);
             this.loadAlunos();
           }

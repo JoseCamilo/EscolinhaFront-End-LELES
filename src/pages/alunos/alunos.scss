@@ -7,4 +7,14 @@ page-alunos {
         max-height: 50px !important; //any size
     }
 
+    .falha {
+        color: red;
+    }
+
+    .deletado {
+        color: red;
+        font-style: italic;
+        text-decoration: line-through;
+    }
+
 }

@@ -13,7 +13,7 @@ export class EscolaDao {
         return this._numDao.getNum();
     }
 
-    private _getEscolas(){
+    public getEscolas(){
         return this._storage.get('escolas').then((res) => {
         if(res){
             return res;
@@ -23,8 +23,18 @@ export class EscolaDao {
       });
     }
 
-    save(escola: Escola) {
-        return  this._getEscolas()
+    private _getIdEscola(){
+        return this._storage.get('setEscola').then((res) => {
+        if(res){
+            return res._id;
+        }else{
+            return null;
+        }
+      });
+    }
+
+    public save(escola: Escola) {
+        return  this.getEscolas()
                     .then((dados) => {
                         let escolas: Escola[] = [];
                         if(dados){
@@ -46,6 +56,33 @@ export class EscolaDao {
 
                         }
                     });
+    }
+
+    public delete(escola: Escola) {
+        return  this.getEscolas()
+                    .then((dados) => {
+                        let escolas = dados;
+                                                                                 
+                        if(escola._id){
+                            let pos = escolas.map(function(e) { return e._id; });
+                            let posEscola = pos.indexOf(escola._id);
+                            escolas[posEscola].deletado = true;
+                            return this._storage.set("escolas", escolas);
+                        }
+                    });
+    }
+
+    public setEscolas(escolas: Escola[]) {
+        return this._getIdEscola()
+                    .then((idEscola) =>{
+
+                        let pos = escolas.map(function(e) { return e._id; });
+                        let posEscola = pos.indexOf(idEscola);
+
+                        this._storage.set('setEscola', escolas[posEscola]);
+                        return this._storage.set("escolas", escolas);
+                    });
+                        
     }
          
 }

@@ -5,6 +5,7 @@ import { Turma } from "../../domain/turma/turma";
 import { AddTurmaPage } from "../addTurma/addTurma";
 import { AlunosTurmaPage } from "../alunosTurma/alunosTurma";
 import { EscolasPage } from "../escolas/escolas";
+import { TurmaDao } from "../../domain/turma/turma-dao";
 
 @Component({
   selector: 'page-turmas',
@@ -15,7 +16,10 @@ export class TurmasPage {
   title: string;
   turmas: Turma[] = [];
 
-  constructor(public navCtrl: NavController, public appCtrl: App, private storage: Storage) {
+  constructor(public navCtrl: NavController, 
+              public appCtrl: App, 
+              private storage: Storage,
+              private _turmaDao: TurmaDao) {
     
   }
 
@@ -33,6 +37,10 @@ export class TurmasPage {
       });
   }
 
+  filterTurmasOfDelete(){
+    return this.turmas.filter(x => !(x.deletado && x.confirmado));
+  }
+
   addTurma(){
     this.navCtrl.push(AddTurmaPage);
   }
@@ -45,5 +53,12 @@ export class TurmasPage {
 
   popToHome(){
     this.appCtrl.getRootNav().setRoot(EscolasPage);
+  }
+
+  reenvia(turma){
+    turma.confirmado = true;
+    this._turmaDao.save(turma)
+      .then(res => this.loadTurmas())
+      .catch(err => console.log(err));
   }
 }

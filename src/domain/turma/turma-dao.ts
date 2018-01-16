@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NumeradorDao } from "../numerador/numerador-dao";
-import { Aluno } from "../aluno/aluno";
 import { Turma } from "./turma";
 
 @Injectable()
@@ -78,7 +77,8 @@ export class TurmaDao {
                                 if(turma._id){
                                     let pos2 = escolas[posEscola].turmas.map(function(e) { return e._id; });
                                     let posTurma = pos2.indexOf(turma._id);
-                                    escolas[posEscola].turmas.splice(posTurma, 1);
+                                    //escolas[posEscola].turmas.splice(posTurma, 1);
+                                    escolas[posEscola].turmas[posTurma].deletado = true;
 
                                     this._storage.set('setEscola', escolas[posEscola]);
                                     return this._storage.set("escolas", escolas);

@@ -21,7 +21,6 @@ import { CobrancasPage } from "../pages/cobrancas/cobrancas";
 import { AddTurmaPage } from "../pages/addTurma/addTurma";
 import { AddJogoPage } from "../pages/addJogo/addJogo";
 import { AddCobrancaPage } from "../pages/addCobranca/addCobranca";
-import { AddPagamentoPage } from "../pages/addPagamento/addPagamento";
 import { NumeradorDao } from "../domain/numerador/numerador-dao";
 import { AlunoDao } from "../domain/aluno/aluno-dao";
 import { EscolaDao } from "../domain/escola/escola-dao";
@@ -32,6 +31,8 @@ import { AddAlunoTurmaPage } from "../pages/addAlunoTurma/addAlunoTurma";
 import { AlunosTurmaPage } from "../pages/alunosTurma/alunosTurma";
 import { AddAlunoJogoPage } from "../pages/addAlunoJogo/addAlunoJogo";
 import { AlunosJogoPage } from "../pages/alunosJogo/alunosJogo";
+import { WsEscolas } from "../providers/wsEscolas";
+import { HttpModule } from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,6 @@ import { AlunosJogoPage } from "../pages/alunosJogo/alunosJogo";
     AddAlunoPage,
     AddTurmaPage,
     AddJogoPage,
-    AddPagamentoPage,
     AddCobrancaPage,
     AlunosTurmaPage,
     AddAlunoTurmaPage,
@@ -55,6 +55,7 @@ import { AlunosJogoPage } from "../pages/alunosJogo/alunosJogo";
     AlunosJogoPage
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
@@ -73,7 +74,6 @@ import { AlunosJogoPage } from "../pages/alunosJogo/alunosJogo";
     AddAlunoPage,
     AddTurmaPage,
     AddJogoPage,
-    AddPagamentoPage,
     AddCobrancaPage,
     AlunosTurmaPage,
     AddAlunoTurmaPage,
@@ -91,6 +91,7 @@ import { AlunosJogoPage } from "../pages/alunosJogo/alunosJogo";
     TurmaDao,
     JogoDao,
     CobrancaDao,
+    WsEscolas,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

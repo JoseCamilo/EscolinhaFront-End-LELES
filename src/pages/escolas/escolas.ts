@@ -3,7 +3,6 @@ import { NavController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { TabsPage } from "../tabs/tabs";
 import { Escola } from "../../domain/escola/escola";
-import { Aluno } from "../../domain/aluno/aluno";
 import { EscolaDao } from "../../domain/escola/escola-dao";
 
 @Component({
@@ -33,9 +32,26 @@ export class EscolasPage {
       });
   }
 
+  filterEscolasOfDelete(){
+    return this.escolas.filter(x => !(x.deletado && x.confirmado));
+  }
+
   itemSelected(escola){
     this.storage.set('setEscola', escola);
     this.navCtrl.setRoot(TabsPage);
+  }
+
+  deletaEscola(escola){
+    this._escolaDao.delete(escola)
+      .then(res => this.navCtrl.popToRoot())
+      .catch(err => console.log(err));
+  }
+
+  reenvia(escola){
+    escola.confirmado = true;
+    this._escolaDao.save(escola)
+      .then(res => this.loadEscolas())
+      .catch(err => console.log(err));
   }
 
   newEscola(){

@@ -12,6 +12,7 @@ export class Escola {
         public jogos: Jogo[] = [],
         public cobrancas: Cobranca[] = [],
         public confirmado: boolean = false,
+        public deletado: boolean = false,
         public _id: string = null
     ) {}
 }

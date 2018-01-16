@@ -17,7 +17,7 @@
 
     <ion-item>
       <ion-label floating>Nome</ion-label>
-      <ion-input type="text" [(ngModel)]="aluno.nome"></ion-input>
+      <ion-input type="text" [(ngModel)]="aluno.nome" #input></ion-input>
     </ion-item>
 
     <ion-item>
@@ -41,6 +41,13 @@
     <ion-item>
       <ion-label floating>RG</ion-label>
       <ion-input type="text" [(ngModel)]="aluno.rg"></ion-input>
+    </ion-item>
+
+    <!--<ion-item (click)="selecionaData()">-->
+    <ion-item>
+      <ion-label stacked>Data de Inscrição</ion-label>
+      <!--<ion-datetime disabled="true" [(ngModel)]="aluno.inscricao" name="data" displayFormat="DD/MM/YY"></ion-datetime>-->
+      <ion-datetime displayFormat="DD/MM/YY" pickerFormat="DD/MM/YY" [(ngModel)]="aluno.inscricao"></ion-datetime>
     </ion-item>
 
   </ion-list>

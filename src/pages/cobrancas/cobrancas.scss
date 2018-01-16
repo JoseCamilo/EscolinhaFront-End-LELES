@@ -1,3 +1,11 @@
 page-cobrancas {
-
+    .falha {
+        color: red;
+    }
+    
+    .deletado {
+        color: red;
+        font-style: italic;
+        text-decoration: line-through;
+    }
 }

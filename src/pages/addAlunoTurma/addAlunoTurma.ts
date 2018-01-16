@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Aluno, AlunoChecked } from "../../domain/aluno/aluno";
-
-import { Camera } from '@ionic-native/camera';
 import { DatePicker } from "@ionic-native/date-picker";
-import { AlunoDao } from "../../domain/aluno/aluno-dao";
 import { Turma } from "../../domain/turma/turma";
 import { TurmaDao } from "../../domain/turma/turma-dao";
 import { AddTurmaPage } from "../addTurma/addTurma";
@@ -24,9 +21,7 @@ export class AddAlunoTurmaPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
               private storage: Storage, 
-              private camera: Camera,
               public datePicker: DatePicker,
-              private _alunoDao: AlunoDao,
               private _turmaDao: TurmaDao) {
 
     if (navParams.get('turma')) {

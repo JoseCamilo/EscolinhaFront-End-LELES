@@ -5,6 +5,7 @@ import { Cobranca } from "../../domain/cobranca/cobranca";
 import { AddCobrancaPage } from "../addCobranca/addCobranca";
 import { PagamentosPage } from "../pagamentos/pagamentos";
 import { EscolasPage } from "../escolas/escolas";
+import { CobrancaDao } from "../../domain/cobranca/cobranca-dao";
 
 @Component({
   selector: 'page-cobrancas',
@@ -15,7 +16,10 @@ export class CobrancasPage {
   title: string;
   cobrancas: Cobranca[] = [];
 
-  constructor(public navCtrl: NavController, public appCtrl: App, private storage: Storage) {
+  constructor(public navCtrl: NavController, 
+              public appCtrl: App, 
+              private storage: Storage,
+              private _cobrancaDao: CobrancaDao) {
     
   }
 
@@ -32,6 +36,10 @@ export class CobrancasPage {
       });
   }
 
+  filterCobrancasOfDelete(){
+    return this.cobrancas.filter(x => !(x.deletado && x.confirmado));
+  }
+
   addCobranca(){
     this.navCtrl.push(AddCobrancaPage);
   }
@@ -44,6 +52,13 @@ export class CobrancasPage {
 
   popToHome(){
     this.appCtrl.getRootNav().setRoot(EscolasPage);
+  }
+
+  reenvia(cobranca){
+    cobranca.confirmado = true;
+    this._cobrancaDao.save(cobranca)
+      .then(res => this.loadCobrancas())
+      .catch(err => console.log(err));
   }
 
 }

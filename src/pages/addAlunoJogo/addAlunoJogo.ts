@@ -22,7 +22,6 @@ export class AddAlunoJogoPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
               private storage: Storage, 
-              private _alunoDao: AlunoDao,
               private _jogoDao: JogoDao) {
 
     if (navParams.get('jogo')) {

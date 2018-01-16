@@ -17,7 +17,6 @@ export class AddAlunoPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
-              private storage: Storage, 
               private camera: Camera,
               public datePicker: DatePicker,
               private _alunoDao: AlunoDao) {

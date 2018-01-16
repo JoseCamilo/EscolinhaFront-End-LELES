@@ -3,8 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Aluno } from "../../domain/aluno/aluno";
 import { AddAlunoPage } from "../addAluno/addAluno";
-import { Turma } from "../../domain/turma/turma";
-import { AddAlunoTurmaPage } from "../addAlunoTurma/addAlunoTurma";
 import { Jogo } from "../../domain/jogo/jogo";
 import { AddAlunoJogoPage } from "../addAlunoJogo/addAlunoJogo";
 
