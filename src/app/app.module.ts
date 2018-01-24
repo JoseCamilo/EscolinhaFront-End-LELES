@@ -33,6 +33,7 @@ import { AddAlunoJogoPage } from "../pages/addAlunoJogo/addAlunoJogo";
 import { AlunosJogoPage } from "../pages/alunosJogo/alunosJogo";
 import { WsEscolas } from "../providers/wsEscolas";
 import { HttpModule } from "@angular/http";
+import { PagamentoDao } from "../domain/pagamento/pagamento-dao";
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { HttpModule } from "@angular/http";
     TurmaDao,
     JogoDao,
     CobrancaDao,
+    PagamentoDao,
     WsEscolas,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

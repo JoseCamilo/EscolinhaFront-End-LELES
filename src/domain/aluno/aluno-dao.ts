@@ -55,21 +55,37 @@ export class AlunoDao {
 
                                     // salva aluno nas turmas da escola atual
                                     if (escolas[posEscola].turmas) {
-                                        for (var index = 0; index < escolas[posEscola].turmas.length; index++) {
+                                        for (let index = 0; index < escolas[posEscola].turmas.length; index++) {
                                         
                                             let pos3 = escolas[posEscola].turmas[index].alunos.map(function(e) { return e._id; });
                                             let pos3Aluno = pos3.indexOf(aluno._id);
-                                            escolas[posEscola].turmas[index].alunos[pos3Aluno] = aluno;
+                                            if(pos3Aluno > -1){
+                                                escolas[posEscola].turmas[index].alunos[pos3Aluno] = aluno;
+                                            }
                                         }
                                     }
     
                                     // salva aluno nos jogos da escola atual                                    
                                     if (escolas[posEscola].jogos) {
-                                        for (var index = 0; index < escolas[posEscola].jogos.length; index++) {
+                                        for (let index = 0; index < escolas[posEscola].jogos.length; index++) {
                                         
                                             let pos4 = escolas[posEscola].jogos[index].alunos.map(function(e) { return e._id; });
                                             let pos4Aluno = pos4.indexOf(aluno._id);
-                                            escolas[posEscola].jogos[index].alunos[pos4Aluno] = aluno;
+                                            if(pos4Aluno > -1){
+                                                escolas[posEscola].jogos[index].alunos[pos4Aluno] = aluno;
+                                            }
+                                        }    
+                                    }
+
+                                    // salva aluno nas cobrancas da escola atual                                    
+                                    if (escolas[posEscola].cobrancas) {
+                                        for (let index = 0; index < escolas[posEscola].cobrancas.length; index++) {
+                                        
+                                            let pos5 = escolas[posEscola].cobrancas[index].pagamentos.map(function(e) { return e.aluno._id; });
+                                            let pos5Aluno = pos5.indexOf(aluno._id);
+                                            if(pos5Aluno > -1){
+                                                escolas[posEscola].cobrancas[index].pagamentos[pos5Aluno].aluno = aluno;
+                                            }
                                         }    
                                     }
                                     
@@ -89,28 +105,34 @@ export class AlunoDao {
                     });
     }
 
-    delete(aluno: Aluno) {
-        return this._getIdEscola()
-                    .then((idEscola) =>{
+    // delete(aluno: Aluno) {
+    //     return this._getIdEscola()
+    //                 .then((idEscola) =>{
 
-                        return this._getEscolas()
-                            .then((dados) => {
-                                let escolas = dados;
-                                let pos = escolas.map(function(e) { return e._id; });
-                                let posEscola = pos.indexOf(idEscola);
+    //                     return this._getEscolas()
+    //                         .then((dados) => {
+    //                             let escolas = dados;
+    //                             let pos = escolas.map(function(e) { return e._id; });
+    //                             let posEscola = pos.indexOf(idEscola);
                                                                             
-                                if(aluno._id){
-                                    let pos2 = escolas[posEscola].alunos.map(function(e) { return e._id; });
-                                    let posAluno = pos2.indexOf(aluno._id);
-                                    //escolas[posEscola].alunos.splice(posAluno,1);
-                                    escolas[posEscola].alunos[posAluno].deletado = true;
-                                    escolas[posEscola].alunos[posAluno].confirmado = false;
+    //                             if(aluno._id){
+    //                                 let pos2 = escolas[posEscola].alunos.map(function(e) { return e._id; });
+    //                                 let posAluno = pos2.indexOf(aluno._id);
+    //                                 //escolas[posEscola].alunos.splice(posAluno,1);
+    //                                 escolas[posEscola].alunos[posAluno].deletado = true;
+    //                                 escolas[posEscola].alunos[posAluno].confirmado = false;
                                     
-                                    this._storage.set('setEscola', escolas[posEscola]);
-                                    return this._storage.set("escolas", escolas);
-                                }
-                            });
-                    });
+    //                                 this._storage.set('setEscola', escolas[posEscola]);
+    //                                 return this._storage.set("escolas", escolas);
+    //                             }
+    //                         });
+    //                 });
+    // }
+
+    delete(aluno: Aluno) {
+        aluno.deletado = true;
+        return this.save(aluno);
     }
+    
          
 }

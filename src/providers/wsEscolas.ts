@@ -47,6 +47,7 @@ export class WsEscolas {
                                     element.cobrancas.forEach(element => {
                                         element.confirmado = true;
                                         element.pagamentos.forEach(element => {
+                                            element.aluno.confirmado = true;
                                             element.confirmado = true;
                                         });
                                     });

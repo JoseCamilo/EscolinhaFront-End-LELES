@@ -44,6 +44,9 @@ export class JogoDao {
                                 let posEscola = pos.indexOf(idEscola);
                                                                             
                                 if(jogo._id){
+                                    // marca como alterado
+                                    jogo.confirmado = false;
+
                                     let pos2 = escolas[posEscola].jogos.map(function(e) { return e._id; });
                                     let posjogo = pos2.indexOf(jogo._id);
                                     escolas[posEscola].jogos[posjogo] = jogo;
@@ -79,6 +82,7 @@ export class JogoDao {
                                     let posjogo = pos2.indexOf(jogo._id);
                                     //escolas[posEscola].jogos.splice(posjogo, 1);
                                     escolas[posEscola].jogos[posjogo].deletado = true;
+                                    escolas[posEscola].jogos[posjogo].confirmado = false;
 
                                     this._storage.set('setEscola', escolas[posEscola]);
                                     return this._storage.set("escolas", escolas);

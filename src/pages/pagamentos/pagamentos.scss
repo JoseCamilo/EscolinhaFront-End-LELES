@@ -9,4 +9,9 @@ page-pagamentos {
     .falha {
         color: red;
     }
+
+    .deletado {
+        font-style: italic;
+        text-decoration: line-through;
+    }
 }

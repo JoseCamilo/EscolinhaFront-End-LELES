@@ -6,6 +6,7 @@ import { AddJogoPage } from "../addJogo/addJogo";
 import { EscolasPage } from "../escolas/escolas";
 import { AlunosJogoPage } from "../alunosJogo/alunosJogo";
 import { JogoDao } from "../../domain/jogo/jogo-dao";
+import { WsEscolas } from "../../providers/wsEscolas";
 
 @Component({
   selector: 'page-jogos',
@@ -19,7 +20,8 @@ export class JogosPage {
   constructor(public navCtrl: NavController, 
               public appCtrl: App, 
               private storage: Storage,
-              private _jogoDao: JogoDao) {
+              private _jogoDao: JogoDao,
+              private _wsEscolas: WsEscolas) {
     
   }
 
@@ -55,9 +57,8 @@ export class JogosPage {
     this.appCtrl.getRootNav().setRoot(EscolasPage);
   }
 
-  reenvia(jogo){
-    jogo.confirmado = true;
-    this._jogoDao.save(jogo)
+  reenvia(){
+    this._wsEscolas.reenviaEscolas()
       .then(res => this.loadJogos())
       .catch(err => console.log(err));
   }

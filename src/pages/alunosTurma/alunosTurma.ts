@@ -5,6 +5,7 @@ import { Aluno } from "../../domain/aluno/aluno";
 import { AddAlunoPage } from "../addAluno/addAluno";
 import { Turma } from "../../domain/turma/turma";
 import { AddAlunoTurmaPage } from "../addAlunoTurma/addAlunoTurma";
+import { WsEscolas } from "../../providers/wsEscolas";
 
 @Component({
   selector: 'page-alunos-turma',
@@ -17,7 +18,9 @@ export class AlunosTurmaPage {
 
   constructor(public navCtrl: NavController,
               private storage: Storage,
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              private _wsEscolas: WsEscolas) {
+                
     if (navParams.get('turma')) {
       this.turma = navParams.get('turma') as Turma;
     }
@@ -48,5 +51,11 @@ export class AlunosTurmaPage {
     this.navCtrl.push(AddAlunoPage,{
       aluno: aluno
     });
+  }
+
+  reenvia(){
+    this._wsEscolas.reenviaEscolas()
+      .then(res => this.loadAlunos())
+      .catch(err => console.log(err));
   }
 }

@@ -15,8 +15,9 @@
   <h2>Devedores</h2>
   
   <ion-list>
+    <!--Alunos que nunca pagaram-->
     <ion-item-sliding *ngFor="let aluno of alunosDev">
-      <ion-item [class.falha]="!aluno.confirmado">
+      <ion-item [class.falha]="!aluno.confirmado" [class.deletado]="aluno.deletado">
         <ion-avatar item-start>
           <img src={{aluno.avatar}}>
         </ion-avatar>
@@ -26,7 +27,25 @@
       <ion-item-options side="right">
         <button 
           ion-button *ngIf="!aluno.confirmado" 
-          (click)="reenvia(aluno)">
+          (click)="reenvia()">
+            Reenviar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <!--Alunos que tiveram o pagamento estornado-->
+    <ion-item-sliding *ngFor="let pagamento of pagsEstorno">
+      <ion-item [class.falha]="!pagamento.confirmado" [class.deletado]="pagamento.aluno.deletado">
+        <ion-avatar item-start>
+          <img src={{pagamento.aluno.avatar}}>
+        </ion-avatar>
+        <h2>{{pagamento.aluno.nome}}</h2>
+        <ion-icon name="checkmark-circle" color="danger" item-end (click)="addPagamento(pagamento.aluno)"></ion-icon>
+      </ion-item>
+      <ion-item-options side="right">
+        <button 
+          ion-button *ngIf="!pagamento.confirmado" 
+          (click)="reenvia()">
             Reenviar
         </button>
       </ion-item-options>
@@ -38,19 +57,20 @@
     <h5 *ngIf='showPag' (click)="showPag=!showPag">Ocultar Pagantes</h5>
   </div>
   
+  <!--Alunos com pagamento efetuado-->
   <ion-list *ngIf='showPag'>
-    <ion-item-sliding *ngFor="let aluno of alunosPag">
-      <ion-item [class.falha]="!aluno.confirmado">
+    <ion-item-sliding *ngFor="let pagamento of pagsConfirmados">
+      <ion-item [class.falha]="!pagamento.confirmado" [class.deletado]="pagamento.aluno.deletado">
         <ion-avatar item-start>
-          <img src={{aluno.avatar}}>
+          <img src={{pagamento.aluno.avatar}}>
         </ion-avatar>
-        <h2>{{aluno.nome}}</h2>
-        <ion-icon name="checkmark-circle" color="primary" item-start (click)="lookPagamento(aluno)"></ion-icon>
+        <h2>{{pagamento.aluno.nome}}</h2>
+        <ion-icon name="checkmark-circle" color="primary" item-start (click)="lookPagamento(pagamento.aluno)"></ion-icon>
       </ion-item>
       <ion-item-options side="right">
         <button 
-          ion-button *ngIf="!aluno.confirmado" 
-          (click)="reenvia(aluno)">
+          ion-button *ngIf="!pagamento.confirmado" 
+          (click)="reenvia(pagamento.aluno)">
             Reenviar
         </button>
       </ion-item-options>

@@ -5,7 +5,7 @@ import { Turma } from "../../domain/turma/turma";
 import { AddTurmaPage } from "../addTurma/addTurma";
 import { AlunosTurmaPage } from "../alunosTurma/alunosTurma";
 import { EscolasPage } from "../escolas/escolas";
-import { TurmaDao } from "../../domain/turma/turma-dao";
+import { WsEscolas } from "../../providers/wsEscolas";
 
 @Component({
   selector: 'page-turmas',
@@ -19,7 +19,7 @@ export class TurmasPage {
   constructor(public navCtrl: NavController, 
               public appCtrl: App, 
               private storage: Storage,
-              private _turmaDao: TurmaDao) {
+              private _wsEscolas: WsEscolas) {
     
   }
 
@@ -55,9 +55,8 @@ export class TurmasPage {
     this.appCtrl.getRootNav().setRoot(EscolasPage);
   }
 
-  reenvia(turma){
-    turma.confirmado = true;
-    this._turmaDao.save(turma)
+  reenvia(){
+    this._wsEscolas.reenviaEscolas()
       .then(res => this.loadTurmas())
       .catch(err => console.log(err));
   }

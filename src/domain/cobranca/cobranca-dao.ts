@@ -44,20 +44,23 @@ export class CobrancaDao {
                                 let posEscola = pos.indexOf(idEscola);
                                                                             
                                 if(cobranca._id){
+                                    // marca como alterado
+                                    cobranca.confirmado = false;
+
                                     let pos2 = escolas[posEscola].cobrancas.map(function(e) { return e._id; });
                                     let poscobranca = pos2.indexOf(cobranca._id);
                                     escolas[posEscola].cobrancas[poscobranca] = cobranca;
-
-                                    this._storage.set('setEscola', escolas[posEscola]);
-                                    return this._storage.set("escolas", escolas);
+                                    
+                                    this._storage.set("escolas", escolas);
+                                    return this._storage.set('setEscola', escolas[posEscola]);
                                 }else{
                                     this._getKey()
                                         .then((key) => {
                                             cobranca._id = key;
                                             escolas[posEscola].cobrancas.push(cobranca);
 
-                                            this._storage.set('setEscola', escolas[posEscola]);                                        
-                                            return this._storage.set("escolas", escolas);
+                                            this._storage.set("escolas", escolas);                                        
+                                            return this._storage.set('setEscola', escolas[posEscola]);
                                         });
                                 }
                             });
@@ -79,9 +82,10 @@ export class CobrancaDao {
                                     let poscobranca = pos2.indexOf(cobranca._id);
                                     //escolas[posEscola].cobrancas.splice(poscobranca,1);
                                     escolas[posEscola].cobrancas[poscobranca].deletado = true;
+                                    escolas[posEscola].cobrancas[poscobranca].confirmado = false;
 
-                                    this._storage.set('setEscola', escolas[posEscola]);
-                                    return this._storage.set("escolas", escolas);
+                                    this._storage.set("escolas", escolas);
+                                    return this._storage.set('setEscola', escolas[posEscola]);
                                 }
                             });
                     });

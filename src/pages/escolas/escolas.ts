@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { TabsPage } from "../tabs/tabs";
 import { Escola } from "../../domain/escola/escola";
 import { EscolaDao } from "../../domain/escola/escola-dao";
+import { WsEscolas } from "../../providers/wsEscolas";
 
 @Component({
   selector: 'page-escolas',
@@ -16,7 +17,8 @@ export class EscolasPage {
   constructor(public navCtrl: NavController, 
               private alertCtrl: AlertController, 
               private storage: Storage,
-              private _escolaDao: EscolaDao) {
+              private _escolaDao: EscolaDao,
+              private _wsEscolas: WsEscolas) {
 
   }
 
@@ -47,9 +49,8 @@ export class EscolasPage {
       .catch(err => console.log(err));
   }
 
-  reenvia(escola){
-    escola.confirmado = true;
-    this._escolaDao.save(escola)
+  reenvia(){
+    this._wsEscolas.reenviaEscolas()
       .then(res => this.loadEscolas())
       .catch(err => console.log(err));
   }

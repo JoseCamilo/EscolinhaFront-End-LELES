@@ -42,11 +42,14 @@ export class AddAlunoTurmaPage {
           let pos = this.turma.alunos.map(function(e) { return e._id; });          
 
           res.alunos.forEach(element => {
-            let posAluno = pos.indexOf(element._id);
-            if(posAluno >= 0){
-              this.alunosCkd.push(new AlunoChecked(true,element))
-            }else{
-              this.alunosCkd.push(new AlunoChecked(false,element))
+            if(!element.deletado){
+              let posAluno = pos.indexOf(element._id);
+      
+              if(posAluno >= 0){
+                this.alunosCkd.push(new AlunoChecked(true,element))
+              }else{
+                this.alunosCkd.push(new AlunoChecked(false,element))
+              }
             }
           });
         }

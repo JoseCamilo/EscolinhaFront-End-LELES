@@ -6,6 +6,7 @@ import { AddCobrancaPage } from "../addCobranca/addCobranca";
 import { PagamentosPage } from "../pagamentos/pagamentos";
 import { EscolasPage } from "../escolas/escolas";
 import { CobrancaDao } from "../../domain/cobranca/cobranca-dao";
+import { WsEscolas } from "../../providers/wsEscolas";
 
 @Component({
   selector: 'page-cobrancas',
@@ -19,7 +20,7 @@ export class CobrancasPage {
   constructor(public navCtrl: NavController, 
               public appCtrl: App, 
               private storage: Storage,
-              private _cobrancaDao: CobrancaDao) {
+              private _wsEscolas: WsEscolas) {
     
   }
 
@@ -54,9 +55,8 @@ export class CobrancasPage {
     this.appCtrl.getRootNav().setRoot(EscolasPage);
   }
 
-  reenvia(cobranca){
-    cobranca.confirmado = true;
-    this._cobrancaDao.save(cobranca)
+  reenvia(){
+    this._wsEscolas.reenviaEscolas()
       .then(res => this.loadCobrancas())
       .catch(err => console.log(err));
   }

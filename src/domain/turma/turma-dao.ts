@@ -44,6 +44,9 @@ export class TurmaDao {
                                 let posEscola = pos.indexOf(idEscola);
                                                                             
                                 if(turma._id){
+                                    // marca como alterado
+                                    turma.confirmado = false;
+
                                     let pos2 = escolas[posEscola].turmas.map(function(e) { return e._id; });
                                     let posTurma = pos2.indexOf(turma._id);
                                     escolas[posEscola].turmas[posTurma] = turma;
@@ -79,6 +82,7 @@ export class TurmaDao {
                                     let posTurma = pos2.indexOf(turma._id);
                                     //escolas[posEscola].turmas.splice(posTurma, 1);
                                     escolas[posEscola].turmas[posTurma].deletado = true;
+                                    escolas[posEscola].turmas[posTurma].confirmado = false;
 
                                     this._storage.set('setEscola', escolas[posEscola]);
                                     return this._storage.set("escolas", escolas);

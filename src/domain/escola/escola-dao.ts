@@ -42,6 +42,9 @@ export class EscolaDao {
                         }                    
                                                                     
                         if(escola._id){
+                            // marca como alterado
+                            escola.confirmado = false;
+
                             let pos = escolas.map(function(e) { return e._id; });
                             let posEscola = pos.indexOf(escola._id);
                             escolas[posEscola] = escola;
@@ -67,6 +70,7 @@ export class EscolaDao {
                             let pos = escolas.map(function(e) { return e._id; });
                             let posEscola = pos.indexOf(escola._id);
                             escolas[posEscola].deletado = true;
+                            escolas[posEscola].confirmado = false;
                             return this._storage.set("escolas", escolas);
                         }
                     });
@@ -79,8 +83,8 @@ export class EscolaDao {
                         let pos = escolas.map(function(e) { return e._id; });
                         let posEscola = pos.indexOf(idEscola);
 
-                        this._storage.set('setEscola', escolas[posEscola]);
-                        return this._storage.set("escolas", escolas);
+                        this._storage.set("escolas", escolas);
+                        return this._storage.set('setEscola', escolas[posEscola]);
                     });
                         
     }

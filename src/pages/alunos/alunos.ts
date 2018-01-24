@@ -56,7 +56,7 @@ export class AlunosPage {
     this.appCtrl.getRootNav().setRoot(EscolasPage);
   }
 
-  reenvia(aluno){
+  reenvia(){
     this._wsEscolas.reenviaEscolas()
       .then(res => this.loadAlunos())
       .catch(err => console.log(err));

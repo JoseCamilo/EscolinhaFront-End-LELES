@@ -5,6 +5,7 @@ import { Aluno } from "../../domain/aluno/aluno";
 import { AddAlunoPage } from "../addAluno/addAluno";
 import { Jogo } from "../../domain/jogo/jogo";
 import { AddAlunoJogoPage } from "../addAlunoJogo/addAlunoJogo";
+import { WsEscolas } from "../../providers/wsEscolas";
 
 @Component({
   selector: 'page-alunos-jogo',
@@ -17,7 +18,9 @@ export class AlunosJogoPage {
 
   constructor(public navCtrl: NavController,
               private storage: Storage,
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              private _wsEscolas: WsEscolas) {
+                
     if (navParams.get('jogo')) {
       this.jogo = navParams.get('jogo') as Jogo;
     }
@@ -48,5 +51,11 @@ export class AlunosJogoPage {
     this.navCtrl.push(AddAlunoPage,{
       aluno: aluno
     });
+  }
+
+  reenvia(){
+    this._wsEscolas.reenviaEscolas()
+      .then(res => this.loadAlunos())
+      .catch(err => console.log(err));
   }
 }
